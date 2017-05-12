@@ -1,0 +1,314 @@
+
+/*								                  	MOBILE ONLY
+ ******************************************************************************************************************************/
+
+@media (min-width: 500px) {
+
+	.social_list li a {
+	    width: 35px;
+	}
+
+	iframe {
+		height: 405px;
+	}
+
+	.trending img {
+		width: 50%;
+		margin-right: 4%;
+	}
+
+	.tptn_after_thumb {
+		width: 46%;
+		float: right;
+	    line-height: 1em;
+	}
+
+	.tptn_title {
+		display: block;
+	}
+
+	.review_item {
+	    height: 160px;
+	}
+
+}
+
+/*								                  	  TABLETS
+ ******************************************************************************************************************************/
+
+@media (min-width: 768px) {
+	
+	h1 {
+		font-size: 35px;
+	}
+
+	p {
+		font-size: 20px;
+	}
+
+	section {
+		padding: 40px 0px;
+	}
+
+	#main_nav {
+	    position: relative;
+	    width: auto;
+	    top: 0;
+	    left: 0;
+	    text-align: right;
+        display: block;
+	}
+
+	#main_nav ul {
+		margin: 0px;
+	}
+
+	#main_nav li {
+		width: auto;
+		font-size: 16px;
+		display: inline-block;
+	}
+
+	.nav_header {
+	    padding: 0px;
+	    margin-top: 5px;
+	    border-bottom: solid 1px #eee;
+	}
+
+	.nav_container {
+	    width: 76%;
+	    margin-top: 20px;
+	    margin-left: 0px;
+	    float: left;
+	}
+
+	#main_nav li:nth-child(1), #main_nav li:nth-child(2), #main_nav li:nth-child(3), #main_nav li:nth-child(4) {
+	    display: inline-block;
+	}
+
+	#burger {
+		display: none;
+	}
+
+	.logo_container {
+	    width: 20%;
+	}
+
+	.logo_container img {
+	    width: 100%;
+	}
+
+	.search_container {
+	    width: 3%;
+	    margin-top: 23px;
+	}
+
+	.search input {
+	    height: 20px;
+	    width: 20px;
+	}
+
+	#s {
+	    width: 280px;
+	    height: 100%;
+	}
+
+	.ddSelected {
+	    padding-bottom: 46px;
+	}
+
+	.trending {
+	    border-right: solid 2px #fe83b1;
+	}
+
+	#cats_left li a, #cats_right li a {
+	    font-size: 15px;
+	}
+
+	.isMobile {
+		z-index: 1;
+	}
+
+	#menu-makeup-nav li {
+	    width: 14%;
+	}
+
+	footer img {
+	    width: 190px;
+	    float: right;
+	}
+
+	/* Tutorial Post */
+
+	.tutPost h2 {
+		font-size: 26px;
+	}
+
+	#vid_product_list a {
+		font-size: 20px;
+	}
+
+	/* Side Bar */
+
+	.side {
+	    border-top: none;
+	    border-left: solid 2px #ccc;
+	    padding-left: 20px;
+	    padding-top: 0px;
+	}
+
+	/* Home Page */
+
+	.mostRecentPost {
+		height: 370px;
+	}
+
+	.homePost h2 {
+		font-size: 20px;
+    	margin-top: 0px;
+	}
+
+	.homePost p {
+		display: block;
+	    font-size: 16px;
+	}
+
+	.homePost:first-child {
+	    margin-top: 0px;
+	}
+
+	.homePost .readMore {
+	    font-size: 18px;
+	}
+
+	#menu-skincare-nav li {
+		width: 31%;
+		float: left;
+		margin-right: 2%;
+	}
+
+	/* looks */
+
+	#looksPage h1 {
+		text-align: left;
+	}
+
+	.mostRecentPost {
+		height: 370px;
+		margin-bottom: 20px;
+	}
+
+	/* Cats Page */
+
+	#category_page .side {
+	    border-right: dashed 2px #ccc;
+	    border-left: none;
+	    box-shadow: none;
+	    position: relative;
+	    left: auto;
+	    width: 100%;
+	    padding: 0px;
+	    display: block;
+	}
+
+	.theFilters {
+	    text-align: left;
+        margin: 0px 0px 40px 0px;
+	}
+
+	.theFilters li {
+	    margin-right: 20px;
+	    padding: 0px 20px;
+	    width: auto;
+	    font-size: 18px;
+	    text-align: center;
+	}
+
+	.review_item {
+	    height: 220px;
+	}
+
+	/* Search Page */
+
+	.searchItem p {
+	    font-size: 16px;
+	}
+
+}
+
+/*								                  	  LAP TOP
+ ******************************************************************************************************************************/
+
+@media (min-width: 992px) {
+	
+	h2 {
+		font-size: 30px;
+	}
+
+	.nav_container {
+	    margin-top: 27px;
+	}
+
+	.search_container {
+	    margin-top: 6px;
+	}
+
+	.search {
+	    margin-top: 27px;
+	}
+
+	/* Home Page */
+
+	.homePost h2 {
+	    margin-top: 10px;
+	    font-size: 25px;
+	    color: #fe83b1;
+	}
+
+	/* Looks */
+
+	.mostRecentPost {
+		height: 450px;
+	}
+
+}
+
+
+/*								                  	  DESK TOP
+ ******************************************************************************************************************************/
+
+@media (min-width: 1200px) {
+	
+	.search_container {
+		margin-top: 0px;
+	}
+
+	.search {
+	    margin-top: 33px;
+	}
+
+	.search input,
+	#searchsubmit {
+	    height: 30px;
+	    width: 30px;
+	}
+	
+	#main_nav li a {
+	    font-size: 0.9em;
+	    padding: 16px;
+	}
+
+	iframe {
+	    height: 476px;
+	}
+
+}
+
+/*								                  	  LARGE
+ ******************************************************************************************************************************/
+
+@media (min-width: 1400px) {
+
+
+
+}
