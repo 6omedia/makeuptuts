@@ -1,0 +1,110 @@
+
+/* aff page */
+
+.affproduct img {
+	max-width: 500px;
+	margin: 0px auto;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.instagram_box {
+    background: #f5f5f5;
+    padding: 0px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: solid 1px #e6e6e6;
+}
+
+.instagram_box img:first-child {
+	margin-left: 2%;
+}
+
+.instagram_box img {
+	width: 22.5%;
+	float: left;
+	margin: 2% 2% 2% 0px;
+}
+
+/* Where to buy */
+
+.where_to_buy_box {
+    margin-bottom: 20px;
+}
+
+.where_to_buy_table {
+	width: 100%;
+	text-align: center;
+}
+
+/* Review */
+
+.product_review {
+	overflow: hidden;
+}
+
+.product_review .rating {
+    /*background: #ffcf43;*/
+    display: inline-block;
+    height: 20px;
+}
+
+.rating-0 { background: #dcdcdc }
+.rating-1 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 10%, #dcdcdc 10%, #dcdcdc 100%); }
+.rating-2 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 20%, #dcdcdc 20%, #dcdcdc 100%); }
+.rating-3 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 30%, #dcdcdc 30%, #dcdcdc 100%); }
+.rating-4 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 40%, #dcdcdc 40%, #dcdcdc 100%); }
+.rating-5 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 50%, #dcdcdc 50%, #dcdcdc 100%); }
+.rating-6 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 60%, #dcdcdc 60%, #dcdcdc 100%); }
+.rating-7 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 70%, #dcdcdc 70%, #dcdcdc 100%); }
+.rating-8 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 80%, #dcdcdc 80%, #dcdcdc 100%); }
+.rating-9 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 90%, #dcdcdc 90%, #dcdcdc 100%); }
+.rating-10 { background: #ffcf43 }
+
+.product_review .rating li {
+	background: url(../img/star.png) no-repeat 50%;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: super;
+    margin-right: -6px;
+}
+
+.product_review .rating li:last-child {
+	margin-right: 0px;
+}
+
+.product_review .procon {
+	width: 50%;
+	float: left;
+	margin-bottom: 0px;
+}
+
+.product_review .procon li {
+    font-size: 16px;
+    padding-left: 25px;
+    color: #de759c;
+    padding-bottom: 5px;
+}
+
+.product_review .pros {
+	clear: both;
+}
+
+.product_review .pros li {
+	background: url(../img/tick.png) no-repeat 0% 3px;
+    background-size: 15px;
+}
+
+.product_review .cons li {
+	background: url(../img/cross.png) no-repeat 0% 3px;
+    background-size: 15px;
+}
+
+/*.instagram_box img:last-child {
+	margin-right: 0%;
+}*/
+
+
+

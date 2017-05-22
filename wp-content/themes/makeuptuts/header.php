@@ -19,17 +19,27 @@
                         
                         <ul class="list social_list">
                             <li class="fb"><a href=""></a></li>
-                            <li class="tw"><a href=""></a></li>
-                            <li class="pin"><a href=""></a></li>
+                            <li class="tw"><a href="https://twitter.com/makeuptuts_"></a></li>
+                            <li class="ig"><a href="https://www.instagram.com/makeuptutorialsco"></a></li>
+                            <li class="pin"><a href="https://uk.pinterest.com/makeuptutorialsco"></a></li>
                         </ul>
 
                     </div>
                     <div class="col-xs-6">
 
                         <ul class="list pink_menu">
-                            <li><a href="">Shop</a></li>
+                            <li><a href="<?php echo home_url() . '/shop'; ?>">Shop</a></li>
                             <li>|</li>
-                            <li><a href="">Login</a></li>
+                            <?php 
+
+                                if(is_user_logged_in()){
+                                    echo '<li><a href="' . wp_logout_url( home_url() ) . '">Logout</a></li>';
+                                }else{
+                                    echo '<li><a href="' . home_url() . '/login">Login </a>/</li>';
+                                    echo '<li><a href="' . home_url() . '/register"> Register</a></li>';
+                                }
+
+                            ?>
                         </ul>
 
                     </div>
