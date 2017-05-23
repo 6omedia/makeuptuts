@@ -19,7 +19,7 @@
 
 		<h2>Related Posts</h2>
 		<?php
-			query_posts('category_name=' . $cat);
+			query_posts('category_name=' . $cat . '&posts_per_page=6');
 		?>
 
 		<ul id="relatedPosts" class="list">

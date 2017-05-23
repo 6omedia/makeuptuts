@@ -144,7 +144,7 @@
 		font-size: 26px;
 	}
 
-	#vid_product_list a {
+	#vid_product_list p {
 		font-size: 20px;
 	}
 
@@ -250,6 +250,14 @@
 	.product p {
 	    font-size: 14px;
 	    margin-top: 10px;
+	}
+
+	#catsSide .sub-menu {
+	    display: none;
+	}
+
+	#catsSide ul li:hover > .sub-menu {
+    	display: block;
 	}
 
 /*
@@ -368,7 +376,7 @@
 
 	/* Wish List */
 
-	.ws_box {
+	.ws_box, .modal_box {
 		width: 650px;
 	}
 
@@ -438,7 +446,7 @@
 		background-size: 40px !important;
 	}
 
-	.ws_box {
+	.ws_box, .modal_box {
 		width: 800px;
 	}
 

@@ -1,18 +1,7 @@
 
-<?php
-
-	function saveToWishList(){
-
-	}
-
-	function loadWishList(){
-
-	}
-
-?>
 
 
-<div class="ws_modal">
+<div class="ws_modal so_modal">
 	
 	<div class="ws_box">
 		<div class="loadingBox">

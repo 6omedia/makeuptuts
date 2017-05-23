@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 	var wishListBtn = $('#wishlist');
 	var modal = $('.ws_modal');
 	var ws_box = $('.ws_box');
-	var loadingBox = $('.loadingBox');
+	var loadingBox = $('.ws_box .loadingBox');
 	var loginMsg = $('.ws_msg').hide();
 	var wishListDisplay = $('.wishListDisplay').hide();
 	var wishlist_list = $('#wishlist_list');
@@ -94,8 +94,6 @@ jQuery(document).ready(function($){
 	}
 
 	function removeFromWishList(productId, callback){
-
-		// console.log(productId);
 
 		// ajax php
 		jQuery.ajax({
@@ -181,7 +179,7 @@ jQuery(document).ready(function($){
 
 	var addToWishListBtn = $('.ws_heart');
 
-	function addToWishList(postId, userId, callback){
+	function addToWishList(postId, callback){
 
 		// ajax php
 		jQuery.ajax({
@@ -208,9 +206,33 @@ jQuery(document).ready(function($){
 		span.addClass('spining');
 
 		var postId = jQuery(this).attr("data-post_id");
-		var userId = jQuery(this).attr("data-user_id");
 
-		addToWishList(postId, userId, function(data){
+		addToWishList(postId, function(data){
+			// change this to Added to WishList
+			// stop spinner
+			span.removeClass('spining');
+			// change hart to tick
+			if(data.success == '1'){
+				span.addClass('ws_added');	
+			}else{
+				
+				// span.append(loginBox);
+				openWishList(false);
+
+			}
+			
+		});
+
+	});
+
+	$('.so_modal').on('click', '.pop_ws_heart', function(){
+		
+		var span = $(this); 
+		span.addClass('spining');
+
+		var postId = jQuery(this).attr("data-post_id");
+
+		addToWishList(postId, function(data){
 			// change this to Added to WishList
 			// stop spinner
 			span.removeClass('spining');
@@ -231,7 +253,6 @@ jQuery(document).ready(function($){
 	$('.where_to_buy_box').on('click', '.ws_added', function(){
 		var thisSpan = $(this);
 		var productId = $(this).data('post_id');
-		console.log('productId: ', productId);
 		removeFromWishList(productId, function(data){
 			if(data.success == '1'){
 				thisSpan.removeClass('ws_added');

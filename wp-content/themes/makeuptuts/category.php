@@ -12,6 +12,7 @@
 				<div class="col-sm-3">
 					<div class="side" id="catsSide">
 						<div class="x cat-x visible-xs">x</div>
+
 						<h2>MakeUp</h2>
 						<?php
 
@@ -38,12 +39,12 @@
 
 			            ?>
 
-						<h2>Hair</h2>
+			            <h2>Hair</h2>
 						<?php
 
 			                $defaults = array(
 			                    'container' => false,
-			                    'theme_location' => 'hair_nav',
+			                    'theme_location' => 'hair_cats',
 			                    'menu_class' => 'list product_cat_list'
 			                );
 			                

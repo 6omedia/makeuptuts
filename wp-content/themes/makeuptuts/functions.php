@@ -31,7 +31,8 @@ function mtuts_register_theme_menus() {
 			'cats_right' => __('Category List Right'),
             'makeup_nav' => __('MakeUp Nav'),
             'skincare_nav' => __('Skincare Nav'),
-            'hair_nav' => __('Hair Nav')
+            'hair_nav' => __('Hair Nav'),
+            'hair_cats' => __('Hair for category page')
 		)
 	);
 	
@@ -77,7 +78,6 @@ function mtuts_theme_js() {
 
     wp_register_script( 'wish_js', get_template_directory_uri() . '/js/wishlist.js', array('main_js') );
     wp_localize_script( 'wish_js', 'wsAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
-
     wp_enqueue_script( 'wish_js' );
 	
     if(is_page('register')){
@@ -86,6 +86,12 @@ function mtuts_theme_js() {
 
     if(is_page('shop')){
         wp_enqueue_script( 'shop_js', get_template_directory_uri() . '/js/shop.js', array('main_js'), '', true);
+    }
+
+    if(is_single()){
+        wp_register_script( 'popupproducts_js', get_template_directory_uri() . '/js/popupproducts.js' );
+        wp_localize_script( 'popupproducts_js', 'ppAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
+        wp_enqueue_script( 'popupproducts_js' );
     }
 
 }
@@ -215,6 +221,9 @@ add_action( 'admin_init', 'mtuts_redirect_admin' );
 
 /* WISHLIST AJAX */
 
+// require('functions/wishlist.php');
+// $wishlist = new WishList();
+
 function wishlist_add_item(){
 
     $response['success'] = '0';
@@ -233,6 +242,9 @@ function wishlist_add_item(){
 
     // wishlist meta
     $productId = $_POST['postId'];
+    if($productId == ''){
+        die();
+    }
 
     $old_wishlist = get_user_meta($user->ID, 'wishlist', true);
 
@@ -376,6 +388,52 @@ add_action("wp_ajax_wishlist_add_item", "wishlist_add_item");
 add_action("wp_ajax_wishlist_get_items", "wishlist_get_items");
 add_action("wp_ajax_wishlist_remove_item", "wishlist_remove_item");
 
-// add_action("wp_ajax_nopriv_wishlist_must_login", "wishlist_must_login");
+/* POPUP PRODUCTS */
+
+// function getCheapestMerchant($merchants){
+//     return $merchants[0];
+// }
+
+function getproduct_info_item(){
+
+    // $response['success'] = '0';
+    global $post; 
+
+    $productId = $_POST['productid'];
+    $productPost = get_post($productId);
+    $response['product']['id'] = $productPost->ID; 
+    $response['product']['link'] = home_url() . '/shop/' . $productPost->post_name;
+    $response['product']['title'] = $productPost->post_title;
+    $response['product']['img'] = get_the_post_thumbnail($productId);
+
+    $custom = get_post_custom($productId);
+
+    $merchants = [];
+
+    $merchantNames = unserialize($custom['merchants'][0]);
+    $merchantIds = unserialize($custom['merchantids'][0]);
+    $merchantLinks = unserialize($custom['links'][0]);
+    $merchantPrices = unserialize($custom['prices'][0]);
+
+    $size = sizeof($merchantNames);
+
+    for($i=0; $i<$size; $i++){
+        $merchants[] = array(
+            'name' => $merchantNames[$i],
+            'id' => $merchantIds[$i],
+            'link' => $merchantLinks[$i],
+            'price' => $merchantPrices[$i]
+        );
+    }
+
+    $response['product']['merchants'] = $merchants;
+
+    echo json_encode($response);
+    die();  
+
+}
+
+add_action("wp_ajax_getproduct_info_item", "getproduct_info_item");
+add_action('wp_ajax_nopriv_getproduct_info_item', 'getproduct_info_item');
 
 ?>
