@@ -98,6 +98,11 @@ section {
     background: #f7b8d0;
 }
 
+.disabled {
+    color: #ccc !important;
+    cursor: default !important;
+}
+
 .current {
 	
 }
@@ -673,6 +678,51 @@ footer img {
 
 #spin {
 	display: none;
+}
+
+blockquote {
+    font-style: italic;
+    text-align: right;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+/* Tutorial Post Content */
+
+.postContent img {
+    width: 50%;
+    margin: 20px 25%;
+}
+
+.postContent strong {
+    font-size: 25px;
+}
+
+.source {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.source a {
+    color: #fe83b1;
+    font-family: 'Trirong', serif;
+}
+
+#vid_product_list tr:hover .ws_heart:before {
+    color: lavenderblush;
+}
+
+#vid_product_list .ws_heart:hover {
+    background: url('img/big-heart.png') no-repeat 100%;
+    background-size: 19px;
+}
+
+#vid_product_list .ws_heart:before {
+    color: #fff;
+}
+
+#vid_product_list .ws_heart:hover::before  {
+    color: #000 !important;
 }
 
 /* Side Bar */
@@ -1405,4 +1455,83 @@ footer img {
 .tutsProductBox .btn_style {
     padding: 0px 10px;
     line-height: 2.5em;
+}
+
+.post_navigation {
+    margin-top: 40px;
+}
+
+/* Content Blocks Override */
+
+.px_slideShow {
+    max-width: 100% !important;
+    background: #fff !important;
+}
+
+.px_slideShow p {
+    padding: 0px 10px;
+}
+
+.px_slideShow img {
+    width: auto !important;
+}
+
+.px_slideShow .prev {
+    background: url(img/left.png) no-repeat 50% 50%;
+    background-size: 100%;
+    opacity: 1;
+}
+
+.px_slideShow .next {
+    background: url(img/right.png) no-repeat 50% 50%;
+    background-size: 100%;
+    opacity: 1;
+}
+
+.pagination {
+    width: 100%;
+}
+
+.pagination>li>a, .pagination>li>span {
+    border: none;
+    color: #fe83b1;
+    border-radius: 100% !important;
+    width: 40px;
+    text-align: center; 
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover {
+    color: #ffd4e4;
+    background: none;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, 
+.pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #ff6bac;
+    border-color: #ff6bac;
+}
+
+.page-numbers.current {
+    border-radius: 100% !important;
+    width: 40px;
+    text-align: center;
+}
+
+/* Bread Crumbs */
+
+.breadCrumbs {
+    background: #f5f5f5;
+    padding: 5px 15px;
+    margin: 20px 0px 35px 0px;
+}
+
+.breadCrumbs li {
+    display: inline-block;
+    color: #000;
+    font-size: 14px;
+}
+
+.breadCrumbs li a {
+    color: #000;
+    font-size: 12px;
 }

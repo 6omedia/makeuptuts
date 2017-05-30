@@ -68,14 +68,27 @@
 
             <?php
 
+                $paged = ( get_query_var('page') ) ? get_query_var('page') : 1;
+
                 $args = array(
-                    'posts_per_page' => 5
+                    'posts_per_page' => 5,
+                    'paged' => $paged
                 );
                 $the_query = new WP_Query( $args );
 
+                // echo '<pre>';
+                // print_r($the_query);
+                // echo '</pre>';
+
+                // $max = 5;
+
+                // $temp_query = $wp_query;
+                // $wp_query   = NULL;
+                // $wp_query   = $the_query;
+
             ?>
             
-            <?php if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+            <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
                 <div class="row">
                     <div class="homePost">
@@ -94,9 +107,20 @@
                     </div>
                 </div>
 
-            <?php endwhile; else : ?>
+            <?php endwhile;  else : ?>
 
             <?php endif; ?>
+
+            <?php mut_pagination(); ?>
+
+            <?php 
+
+                // mut_numeric_posts_nav($the_query, $paged, $max); 
+
+                // $wp_query = NULL;
+                // $wp_query = $temp_query;
+
+            ?>
 
         </div>
         <div class="col-sm-3">

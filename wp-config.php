@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The base configuration for WordPress
  *
@@ -18,24 +19,62 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'makeup_tuts');
+switch( $_SERVER['HTTP_HOST'] )
+{
+	case 'makeuptutorials.co':
+	case 'www.makeuptutorials.co':
+	{
+		// Localhost
+		/** The name of the database for WordPress */
+		define('DB_NAME', 'pgtraine_mut_140916');
 
-/** MySQL database username */
-define('DB_USER', 'root');
+		/** MySQL database username */
+		define('DB_USER', 'pgtraine_mike');
 
-/** MySQL database password */
-define('DB_PASSWORD', '');
+		/** MySQL database password */
+		define('DB_PASSWORD', 'RhFB%f_im+mH');
 
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
+		/** MySQL hostname */
+		define('DB_HOST', 'localhost');
+
+		define('WP_HOME','http://makeuptutorials.co');
+		define('WP_SITEURL','http://makeuptutorials.co');
+	}
+	break;
+
+	case 'localhost':
+	{
+		// Localhost
+		// /** The name of the database for WordPress */
+		define('DB_NAME', 'makeup_tuts');
+
+		/** MySQL database username */
+		define('DB_USER', 'root');
+
+		/** MySQL database password */
+		define('DB_PASSWORD', '');
+
+		/** MySQL hostname */
+		define('DB_HOST', 'localhost');
+
+		define('WP_HOME','http://localhost/makeuptuts');
+		define('WP_SITEURL','http://localhost/makeuptuts');
+
+	}
+	break;
+}
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8mb4');
 
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
+
+define( 'WP_MEMORY_LIMIT', '128M' );
+
+define( 'WP_AUTO_UPDATE_CORE', false );
+
+define('DISALLOW_FILE_EDIT', true);
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -46,14 +85,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'zy`zfb|SQi-u},#pV4a{X,&cM+<j5U~C5~C5tbTz1|;,&4q,+lyM8;n3;U:XF,[<');
-define('SECURE_AUTH_KEY',  '-D(xB*H%=Zq+,w mdiG]7|x;y:)~([=+~d=r+J!7NSMnSs}zpWJ_0`p|hyUX?9Ok');
-define('LOGGED_IN_KEY',    'F(RGZ9b1c]+n%e0|X!1R#NwO1b~Z<rNm{qKM[ Nk|@xc3T6}8sIAh^C&?s2~6*Y5');
-define('NONCE_KEY',        'iD{oC}<tla^K1mDkUP~W9RB9.z8`1kDq7dnsG9AjX[q>*2I^#Ch&PN&.mm-Fiyo.');
-define('AUTH_SALT',        'oG+)/2R{R3F+&^:wT`l#FCz-^nE7Uqy0IwW7l51hYw2m?I/r2Jix#geB.A0I#GBr');
-define('SECURE_AUTH_SALT', 'G9e@H%;:jn`&SKpZu72Z(@m#ah*RUoQ.;ogL2-cK1)GT.QKU*`KO#8~Sa]%o4K+S');
-define('LOGGED_IN_SALT',   'wX M#.CPaK)03+oSi4xxH~+xb8,9aZ/x|;Rb+ma>g}AKM$^H;?n mH>LEB >AhdD');
-define('NONCE_SALT',       '?x7Y[kLRkQQKbzy!!VWjrkw8dfyb=[@6<ZyN F3Sr0$(u~i!|1_ifMFzdgyg]hqV');
+define('AUTH_KEY',         'j?W1&^I%=.69q0*yyGsQHX4-i8oF6gk^MOe>CwJ$O{drQKwI%Py={Sgb*e (@7:G');
+define('SECURE_AUTH_KEY',  'sA4j|R>_Q 3tUJRG2R!hdUUF7o%]Wx?0ck0b.%TQVMR9,0PDa_xpdlVAVSnU9H+D');
+define('LOGGED_IN_KEY',    '~vzpo6zO1bFLCA|}#]0_ t[,)JMWa,uwH]vaRm%SRM),WapnPHvAlm(NWyX~%#L}');
+define('NONCE_KEY',        '0e&yvSePjY1mHF9q?Tbal/t~5s~P1iNx[&h=}RZ]7Fp/(C]:9w{}k/m>^TNzGeW>');
+define('AUTH_SALT',        'k:K?4.!]|haLkzZ.}X<Ew7{FHED31c;E:e2fSSH7%_Z!h{#M?F!?`QqYWjHQk#* ');
+define('SECURE_AUTH_SALT', 'Yc&zr?q!Evlb.($g^zu!wlpe`tLju`{D;.|4s.0s{LNwyw@.0xaVF$$UysN^Yy2x');
+define('LOGGED_IN_SALT',   '--K89lpmF6bh&2oocLxh`eG{QF19z&::Rq?u(`nIk-`x-#9^byW#^c4?$,F[~1!.');
+define('NONCE_SALT',       'A#qve55T:a=%1gqauwpuX/s@teHe;<t.Oc-S[{q`>Pr23aOaib1`.B0F{QDp4o[x');
 
 /**#@-*/
 

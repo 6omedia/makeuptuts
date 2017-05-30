@@ -26,9 +26,7 @@
 							<?php echo get_dev_share_buttons(); ?>
 
 							<h2>What You'll Need</h2>
-							<a id="selectAll">Select All</a>
-							<a id="addAll">Add Selected To Wish List</a>
-							<img id="spin" class="spin" src="<?php bloginfo('template_directory'); ?>/img/ajax-loader.gif">
+							<!-- <a id="selectAll">Select All</a> -->
 
 							<?php
 

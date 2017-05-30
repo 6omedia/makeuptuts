@@ -59,7 +59,6 @@ mtuts_create_widget( 'Page Sidebar', 'page', 'Displays on the side of pages with
 mtuts_create_widget( 'Search Sidebar', 'search', 'Displays the search box on the header' );
 mtuts_create_widget( 'Trending Sidebar', 'trending', 'For the popular posts' );
 
-
 function mtuts_theme_styles() {
 	
 	wp_enqueue_style( 'bootstrap_css', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' );
@@ -89,7 +88,7 @@ function mtuts_theme_js() {
     }
 
     if(is_single()){
-        wp_register_script( 'popupproducts_js', get_template_directory_uri() . '/js/popupproducts.js' );
+        wp_register_script( 'popupproducts_js', get_template_directory_uri() . '/js/popupproducts.js', array('wish_js'));
         wp_localize_script( 'popupproducts_js', 'ppAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
         wp_enqueue_script( 'popupproducts_js' );
     }
@@ -200,6 +199,7 @@ function redirect_logged_in_user( $redirect_to = null ) {
  * Disable admin bar on the frontend of your website
  * for subscribers.
  */
+
 function mtuts_disable_admin_bar() {
     if ( ! current_user_can('edit_posts') ) {
         add_filter('show_admin_bar', '__return_false');
@@ -241,31 +241,35 @@ function wishlist_add_item(){
     $user = wp_get_current_user();
 
     // wishlist meta
-    $productId = $_POST['postId'];
-    if($productId == ''){
+    if($_POST['postId'] == ''){
         die();
     }
+
+    $productIds = json_decode($_POST['postId']);
 
     $old_wishlist = get_user_meta($user->ID, 'wishlist', true);
 
     if (isset($old_wishlist) && is_array($old_wishlist)){
         //if we saved already more the one notes
-        $old_wishlist[] = $productId;
+        $old_wishlist = array_merge($old_wishlist, $productIds);
         if(update_user_meta( $user->ID, 'wishlist', $old_wishlist) != false)
             $response['success'] = '1';
+            $response['ws'] = $old_wishlist;
 
     }
     if (isset($old_wishlist) && !is_array($old_wishlist)){
         //if we saved only one note before
-        $new_wishlist = array($old_wishlist, $productId);
+        $new_wishlist = array($old_wishlist, $productIds);
         if(update_user_meta( $user->ID, 'wishlist', $new_wishlist) != false )
             $response['success'] = '1';
+            $response['newws'] = $new_wishlist;
     
     }
     if (!isset($old_wishlist)){
         //first note we are saving fr this user
-        if(update_user_meta( $user->ID, 'wishlist', $productId) != false )
+        if(update_user_meta( $user->ID, 'wishlist', $productIds) != false )
             $response['success'] = '1';
+            $response['productId'] = $productId;
     
     }
 
@@ -384,6 +388,35 @@ function wishlist_remove_item(){
 
 }
 
+function wishListClasses($productId){
+
+    $wsHeart = 'ws_heart'; 
+    $wsAdded = 'ws_heart ws_added';
+
+    global $current_user;
+
+    if(!is_user_logged_in()){
+        return $wsHeart;
+    }
+
+    $wishlist = get_user_meta($current_user->ID, 'wishlist', true);
+
+    if(!isset($wishlist)){
+        return $wsHeart;
+    }
+
+    if(!is_array($wishlist)){
+        return $wsHeart;
+    }
+
+    if(in_array($productId, $wishlist)){
+        return $wsAdded;
+    }else{
+        return $wsHeart;
+    }
+
+}
+
 add_action("wp_ajax_wishlist_add_item", "wishlist_add_item");
 add_action("wp_ajax_wishlist_get_items", "wishlist_get_items");
 add_action("wp_ajax_wishlist_remove_item", "wishlist_remove_item");
@@ -426,7 +459,12 @@ function getproduct_info_item(){
         );
     }
 
+    usort($merchants, function($a, $b){
+        return $a['price'] - $b['price'];
+    });
+
     $response['product']['merchants'] = $merchants;
+    $response['ws_classes'] = wishListClasses($productId);
 
     echo json_encode($response);
     die();  
@@ -435,5 +473,41 @@ function getproduct_info_item(){
 
 add_action("wp_ajax_getproduct_info_item", "getproduct_info_item");
 add_action('wp_ajax_nopriv_getproduct_info_item', 'getproduct_info_item');
+
+// require('inc/tutorial_content.php');
+// $tutsContent = new TutsContent();
+
+function mut_pagination() {
+    global $wp_query;
+    $big = 999999999;
+    $pages = paginate_links(array(
+        'base' => str_replace($big, '%#%', get_pagenum_link($big)),
+        'format' => '?page=%#%',
+        'current' => max(1, get_query_var('paged')),
+        'total' => $wp_query->max_num_pages,
+        'prev_next' => false,
+        'type' => 'array',
+        'prev_next' => TRUE,
+        'prev_text' => '&larr;',
+        'next_text' => '&rarr;',
+            ));
+
+    if (is_array($pages)) {
+        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
+        echo '<ul class="pagination">';
+        foreach ($pages as $i => $page) {
+            if ($current_page == 1 && $i == 0) {
+                echo "<li class='active'>$page</li>";
+            } else {
+                if ($current_page != 1 && $current_page == $i) {
+                    echo "<li class='active'>$page</li>";
+                } else {
+                    echo "<li>$page</li>";
+                }
+            }
+        }
+        echo '</ul>';
+    }
+}
 
 ?>

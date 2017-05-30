@@ -179,16 +179,31 @@ jQuery(document).ready(function($){
 
 	var addToWishListBtn = $('.ws_heart');
 
-	function addToWishList(postId, callback){
+	window.ws_arrayNums = function(array){
+		$(array).each(function(index){
+			array[index] = parseInt(array[index]);
+		});
+		return array;
+	}
 
-		// ajax php
+	window.addToWishList = function(idArray, callback){
+
+	 	var postId = '';
+
+	 	if(Array.isArray(idArray)){
+	 		postId = ws_arrayNums(idArray);
+	 	}else{
+	 		postId = [];
+	 		postId.push(parseInt(idArray));
+	 	}
+
 		jQuery.ajax({
 	        type: "post",
 	        dataType: "json",
 	        url: wsAjax.ajaxurl,
 	        data: {
 	        	action: "wishlist_add_item", 
-	        	postId: postId
+	        	postId: JSON.stringify(postId)
 	        },
 	        success: function(data) {
 	            callback(data);
@@ -201,8 +216,9 @@ jQuery(document).ready(function($){
 	}
 
 	addToWishListBtn.on('click', function(){
-		
+
 		var span = $(this); 
+
 		span.addClass('spining');
 
 		var postId = jQuery(this).attr("data-post_id");
@@ -233,6 +249,7 @@ jQuery(document).ready(function($){
 		var postId = jQuery(this).attr("data-post_id");
 
 		addToWishList(postId, function(data){
+			console.log(data);
 			// change this to Added to WishList
 			// stop spinner
 			span.removeClass('spining');

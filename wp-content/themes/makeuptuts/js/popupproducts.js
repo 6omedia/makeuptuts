@@ -14,9 +14,20 @@ jQuery(document).ready(function($){
 		table: $('#popupTable')
 	};
 
+	var vid_products = $('#vid_product_list tr');
+	var addAll = $('#addAll');
+
 	class Product {
 
-		appendLinks(link, linksElem, postId){
+		appendLinks(link, linksElem, postId, ws_classes){
+
+			var wsClasses = 'pop_ws_heart';
+
+			if(ws_classes == 'ws_heart ws_added'){
+				wsClasses = 'pop_ws_heart ws_added';
+			}
+
+			console.log('HJHBJKKBJ ', wsClasses);
 
 			var moreDetails = $('<a>', 
 									{
@@ -27,7 +38,7 @@ jQuery(document).ready(function($){
 
 			var addWs = $('<span>', 
 								{
-									"class": "pop_ws_heart",
+									"class": wsClasses,
 									"data-post_id": postId
 								}
 						);
@@ -38,13 +49,13 @@ jQuery(document).ready(function($){
 
 		}
 
-		renderProduct(){
+		renderProduct(ws_classes){
 			this.elems.title.text(this.title);
 			this.elems.img.empty();
 			this.elems.img.append(this.img);
 			this.elems.table.empty();
 
-			this.appendLinks(this.link, this.elems.links, this.id);
+			this.appendLinks(this.link, this.elems.links, this.id, ws_classes);
 
 			var table = this.elems.table;
 			
@@ -53,7 +64,7 @@ jQuery(document).ready(function($){
 				string += '<tr>';
 				string += '<td>' + this.name + '</td>';
 				string += '<td>£' + this.price + '</td>';
-				string += '<td><a class="btn_style" href="' + this.link + '">Buy</a></td>';
+				string += '<td><a target="_blank" class="btn_style" href="' + this.link + '">Buy</a></td>';
 				string += '</tr>';
 				table.append(string);
 			});			
@@ -98,10 +109,10 @@ jQuery(document).ready(function($){
 		tutsLoadingBox.fadeIn(200);
 		tutsProductBox.fadeOut(200);
 		loadProduct(productid, function(data){
-			console.log(data);
+			console.log('loadProduct: ', data);
 			if(data.product != null){
 				var product = new Product(data.product, tuts_product_elems);
-				product.renderProduct();
+				product.renderProduct(data.ws_classes);
 				tutsLoadingBox.fadeOut(200);
 				tutsProductBox.fadeIn(200);
 			}else{
@@ -114,6 +125,14 @@ jQuery(document).ready(function($){
 		tutsModal.fadeOut(200);
 	}
 
+	function disableSelectAll(){
+		addAll.addClass('disabled');
+	}
+
+	function enableSelectAll(){
+		addAll.removeClass('disabled');
+	}
+
 	tutsProduct.on('click', function(){
 		var tr = $(this).parent().parent();
 		openProductModal($(tr).data('productid'));
@@ -121,6 +140,31 @@ jQuery(document).ready(function($){
 
 	$('.tuts_x').on('click', function(){
 		closeProductModal();
+	});
+
+	addAll.on('click', function(){
+
+		if(!$(this).hasClass('disabled')){
+
+			var productArray = [];
+
+			vid_products.each(function(){
+				productArray.push($(this).data('productid'));
+			});
+
+			addToWishList(productArray, function(data){
+				if(data.success == '1'){
+					// tick all products
+					vid_products.each(function(){
+						$(this).find('.ws_heart').addClass('ws_added');
+					});
+					// disable select all
+					disableSelectAll();
+				}
+			});
+
+		}
+
 	});
 
 });

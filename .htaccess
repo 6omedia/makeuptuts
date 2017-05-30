@@ -1,4 +1,15 @@
 
+# Block the include-only files.
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteRule ^wp-admin/includes/ - [F,L]
+	RewriteRule !^wp-includes/ - [S=3]
+	RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+	RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+	RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -10,3 +21,19 @@ RewriteRule . /makeuptuts/index.php [L]
 </IfModule>
 
 # END WordPress
+
+<files wp-config.php>
+	order allow,deny
+	deny from all
+</files>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  # Attempt to load files from production if
+  # they're not in our local version
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule wp-content/uploads/(.*) \
+    http://makeuptutorials.co/wp-content/uploads/$1 [NC,L]
+</IfModule>
